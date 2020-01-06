@@ -1,21 +1,14 @@
 import 'package:mobx/mobx.dart';
+part 'home_controller.g.dart';
 
-class HomeController{
+class HomeController = HomeControllerBase with _$HomeController;
 
-  var _counter = Observable(0);
-  int get counter => _counter.value;
-  set counter(int newValue) => _counter.value = newValue;
-  Action increment;
+abstract class HomeControllerBase with Store{
+  @observable
+  int counter = 0;
 
-  HomeController(){
-    increment = Action(_increment);
-
-    autorun((_) {
-      print(counter);
-    });
-  }
-
-  _increment(){
+  @action
+  increment(){
     counter++;
   }
 }
