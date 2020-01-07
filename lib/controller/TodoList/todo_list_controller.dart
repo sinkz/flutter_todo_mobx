@@ -17,4 +17,9 @@ abstract class TodoListcontrollerBase with Store{
     print(list);
   }
 
+  @action
+  remove({index}){
+    list.removeAt(index);
+  }
+
 }

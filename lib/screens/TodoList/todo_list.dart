@@ -37,16 +37,27 @@ class TodoList extends StatelessWidget {
                 )
               ],
             ),
-            Flexible(          
-              child: Observer(builder: (_) {
-                return ListView.builder(
-                  itemExtent: 100.0,
-                  itemCount: controller.list.length,
-                  itemBuilder: (context, index) =>
-                      TodoItem(controller.list[index]),
-                );
-              }),
-            )
+            Flexible(
+              child: Padding(
+                padding: EdgeInsets.only(top: 10),
+                child: Observer(builder: (_) {
+                  return ListView.builder(
+                    itemCount: controller.list.length,
+                    itemBuilder: (context, index) => Dismissible(
+                      background: Container(color: Colors.red),
+                      key: Key("$index"),
+                      onDismissed: (direction) {
+                        controller.remove(index: index);
+                        Scaffold.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                "${controller.list[index].name} dismissed")));
+                      },
+                      child: TodoItem(controller.list[index]),
+                    ),
+                  );
+                }),
+              ),
+            ),
           ],
         ),
       ),

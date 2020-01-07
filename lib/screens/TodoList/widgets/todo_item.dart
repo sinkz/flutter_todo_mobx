@@ -14,7 +14,7 @@ class TodoItem extends StatelessWidget {
               _todo.name,
               style: TextStyle(color: Colors.black),
             ),
-          )
+          ),
         ],
       );
 }
